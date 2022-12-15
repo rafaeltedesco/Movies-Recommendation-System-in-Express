@@ -6,17 +6,19 @@ const { OK } = require("../utils/httpResponse/httpStatusCode");
 
 const router = Router();
 
-router.get("/", (_req, res) => {
-  res.status(OK).json(movies);
+router.get("/", (req, res) => {
+  const { userId } = req.query;
+  if (!userId) {
+    return res.status(OK).json(movies);
+  }
+  const userMovies = moviesAvaliation.filter(
+    ({ user_id }) => user_id === Number(userId)
+  );
+
+  return res.status(OK).json(userMovies);
+  
 });
 
-
-router.get("/all", (req, res) => {
-    const { userId } = req.query;
-    const userMovies = moviesAvaliation.filter(({ user_id }) => user_id === Number(userId));
-    res.status(200).json(userMovies);
-  });
-  
 router.get("/:id", (req, res) => {
   const { id } = req.params;
   const movie = movies.find((movie) => movie.id === Number(id));

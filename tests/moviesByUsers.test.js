@@ -57,7 +57,7 @@ const userMovies = [
 describe("Test Movie By User", function () {
   describe("/movies/all?userId=id", function () {
     it("should return all movies for user with id 1", async function () {
-      const response = await chai.request(app).get("/movies/all").query({
+      const response = await chai.request(app).get("/movies").query({
         userId: 1,
       });
       expect(response).to.have.status(200);
