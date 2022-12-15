@@ -1,0 +1,11 @@
+version: '3.0'
+
+services:
+  backend:
+    build: .
+    volumes:
+      - ./:/usr/app/
+    tty: true
+    stdin_open: true
+    ports:
+      - 3001:3001

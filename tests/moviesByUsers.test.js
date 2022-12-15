@@ -55,13 +55,28 @@ const userMovies = [
 ];
 
 describe("Test Movie By User", function () {
-  describe("/movies/all?userId=id", function () {
+  describe("/movies using query params", function () {
     it("should return all movies for user with id 1", async function () {
       const response = await chai.request(app).get("/movies").query({
         userId: 1,
       });
       expect(response).to.have.status(200);
       expect(response.body).to.deep.equal(userMovies);
+    });
+    it("should return movie with id 7 from user 1", async function () {
+      const expectedMovie = {
+        id: 10,
+        movie_id: 7,
+        user_id: 1,
+        stars: 4,
+      };
+      const response = await chai.request(app).get("/movies").query({
+        userId: 1,
+        movieId: 7,
+      });
+
+      expect(response).to.have.status(200);
+      expect(response.body).to.deep.equal(expectedMovie);
     });
   });
 });

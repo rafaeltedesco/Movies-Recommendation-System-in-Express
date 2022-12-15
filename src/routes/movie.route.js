@@ -7,13 +7,18 @@ const { OK } = require("../utils/httpResponse/httpStatusCode");
 const router = Router();
 
 router.get("/", (req, res) => {
-  const { userId } = req.query;
+  const { userId, movieId } = req.query;
   if (!userId) {
     return res.status(OK).json(movies);
   }
   const userMovies = moviesAvaliation.filter(
     ({ user_id }) => user_id === Number(userId)
   );
+
+  if (movieId) {
+    const movie = userMovies.find((({ movie_id }) => movie_id === Number(movieId)))
+    return res.status(OK).json(movie);
+  }
 
   return res.status(OK).json(userMovies);
   
