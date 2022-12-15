@@ -16,7 +16,6 @@ app.get("/users/:id", (req, res) => {
 });
 
 app.get("/movies", (_req, res) => {
-  console.log(movies);
   res.status(OK).json(movies);
 });
 
