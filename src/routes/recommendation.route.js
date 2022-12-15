@@ -4,10 +4,10 @@ const router = Router()
 
 router.get('/user/:id', (req, res) => {
     res.status(200).json({
-        prob: 4.658883227,
+        prob: 4.52656746,
         movie: {
-          id: 7,
-          name: "Jurassic Park",
+          id: 6,
+          name: "Pulp Fiction",
         },
     })
 })
