@@ -7,6 +7,7 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
+const users = require('../src/database/users.json');
 
 describe('Test Users routes', function () {
     describe('/GET', function () {
@@ -14,6 +15,7 @@ describe('Test Users routes', function () {
             const response = await chai.request(app)
                 .get('/')
             expect(response).to.have.status(200)
+            expect(response.body).to.deep.equal(users);
         })
     })
 })
