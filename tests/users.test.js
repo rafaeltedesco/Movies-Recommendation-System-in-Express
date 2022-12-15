@@ -9,17 +9,17 @@ const { expect } = chai;
 const users = require("../src/database/users.json");
 
 describe("Test Users routes", function () {
-  describe("GET /", function () {
+  describe("GET /users", function () {
     it("should have return all users and status 200", async function () {
-      const response = await chai.request(app).get("/");
+      const response = await chai.request(app).get("/users");
       expect(response).to.have.status(200);
       expect(response.body).to.deep.equal(users);
     });
   });
-  describe("GET /:id", function () {
+  describe("GET /users:id", function () {
     it("should return user with id 1", async function () {
       const userId = 1;
-      const response = await chai.request(app).get(`/${userId}`);
+      const response = await chai.request(app).get(`/users/${userId}`);
       expect(response).to.have.status(200);
       expect(response.body).to.deep.equal(users[0]);
     });
