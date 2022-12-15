@@ -10,7 +10,7 @@ const users = require("../src/database/users.json");
 
 describe("Test Users routes", function () {
   describe("/GET", function () {
-    it("should have status 200", async function () {
+    it("should have return all users and status 200", async function () {
       const response = await chai.request(app).get("/");
       expect(response).to.have.status(200);
       expect(response.body).to.deep.equal(users);
