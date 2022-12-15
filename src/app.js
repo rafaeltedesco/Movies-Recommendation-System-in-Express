@@ -4,7 +4,7 @@ const users = require('./database/users.json');
 
 const app = express();
 
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
     res.status(OK).json(users)
 })
 
