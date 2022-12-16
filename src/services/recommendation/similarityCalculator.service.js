@@ -1,5 +1,6 @@
 
 
-const calculateSimilarity = (userId, users) => {
+const calculateSimilarity = (user, userToCompare) => {
+    
 
 }

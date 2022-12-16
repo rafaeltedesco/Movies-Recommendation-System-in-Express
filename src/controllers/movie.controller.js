@@ -8,10 +8,10 @@ const getAllMovies = async (req, res) => {
     const movies = await moviesService.findAll();
     return res.status(OK).json(movies);
   }
-  const userMovies = await moviesAvaliationService.getMoviesByPerson(userId);
+  const userMovies = await moviesAvaliationService.getMoviesAvaliationByPerson(userId);
 
   if (movieId) {
-    const movie = await moviesAvaliationService.getPersonAvaliationByMovieId(userId, movieId)
+    const movie = await moviesAvaliationService.getMovieAvaliationById(userId, movieId)
     
     return res.status(OK).json(movie);
   }
