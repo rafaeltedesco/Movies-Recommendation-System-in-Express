@@ -7,13 +7,50 @@
 // - Calculate probably rate that person 2 will vote
 // - recommend movie with best probably rate
 
-// const chai = require("chai");
-// const chaiHttp = require("chai-http");
-// const app = require("../../src/app");
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+const app = require("../../src/app");
 
-// chai.use(chaiHttp);
+chai.use(chaiHttp);
 
-// const { expect } = chai;
+const { expect } = chai;
+
+describe("Test Recommendation", function () {
+  describe("Test GET /recommendation", function () {
+    describe("When User with id 2", function () {
+      it("should show a list of similar persons sorted by similarity", async function () {
+        const expectedBody = [
+          {
+            user_id: 3,
+            prob: "0.40",
+          },
+          {
+            user_id: 1,
+            prob: "0.39",
+          },
+          {
+            user_id: 5,
+            prob: "0.35",
+          },
+          {
+            user_id: 4,
+            prob: "0.33",
+          },
+          {
+            user_id: 6,
+            prob: "0.00",
+          },
+        ];
+        const response = await chai
+          .request(app)
+          .get("/recommendation/show-similar-users");
+
+        expect(response).to.have.status(200);
+        expect(response.body).to.deep.equal(expectedBody);
+      });
+    });
+  });
+});
 
 // describe("Test Recommendation System", function () {
 //   describe("Reccomend a movie for user with id 2", function () {
