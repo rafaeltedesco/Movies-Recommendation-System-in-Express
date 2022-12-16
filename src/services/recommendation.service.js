@@ -1,5 +1,5 @@
-const getSimilarPersons = (personId) =>
-  new Promise((resolve)=>
+const getSimilarPersons = (personId) => {
+    return new Promise((resolve)=>
     resolve([
       {
         id: 3,
@@ -15,6 +15,8 @@ const getSimilarPersons = (personId) =>
       },
     ])
   );
+}
+  
 
 module.exports = {
   getSimilarPersons,
