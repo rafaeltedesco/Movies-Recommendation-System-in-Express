@@ -1,12 +1,12 @@
 const chai = require("chai");
 const chaiHttp = require("chai-http");
-const app = require("../src/app");
+const app = require("../../src/app");
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
 
-const movies = require("../src/database/movies.json");
+const movies = require("../../src/database/movies.json");
 
 describe("Test Movies routes", function () {
   describe("GET / movies", function () {
