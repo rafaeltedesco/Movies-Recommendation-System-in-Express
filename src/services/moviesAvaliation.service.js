@@ -7,7 +7,7 @@ const getMoviesAvaliationByPerson = async (userId) => moviesAvaliation.filter(({
 const findById = async (id) =>
   moviesAvaliation.find((movieAvaliation) => movieAvaliation.id === Number(id));
 
-const getMovieAvaliationById = async (userId, movieId) => {
+const getMovieAvaliationByMovieId = async (userId, movieId) => {
     const userMovies = await getMoviesAvaliationByPerson(userId);
     return userMovies.find(({movie_id}) => movie_id === Number(movieId))
 }
@@ -16,5 +16,5 @@ module.exports = {
   findAll,
   findById,
   getMoviesAvaliationByPerson,
-  getMovieAvaliationById
+  getMovieAvaliationByMovieId
 };
