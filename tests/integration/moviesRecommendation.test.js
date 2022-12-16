@@ -43,7 +43,7 @@ describe("Test Recommendation", function () {
         ];
         const response = await chai
           .request(app)
-          .get("/recommendation/show-similar-users");
+          .get("/recommendation/show-similar-users/2");
 
         expect(response).to.have.status(200);
         expect(response.body).to.deep.equal(expectedBody);
