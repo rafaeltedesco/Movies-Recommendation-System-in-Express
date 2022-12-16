@@ -10,7 +10,6 @@ const getUsersSimilarity = async (userId) => {
 
 const sortSimilarity = async (usersSimilarity, desc = true) => {
   usersSimilarity.sort(({prob}, user) => desc ? user.prob - prob : prob - user.prob)
-  console.log(usersSimilarity)
 }
 
 module.exports = {
