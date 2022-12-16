@@ -49,6 +49,18 @@ describe("Test Recommendation", function () {
         expect(response.body).to.deep.equal(expectedBody);
       });
     });
+    describe("When user id is invalid", function () {
+      it("should return User Not Found when id is invalid", async function () {
+        const userId = 7;
+        const response = await chai
+          .request(app)
+          .get(`/recommendation/show-similar-users/${userId}`);
+        expect(response).to.have.status(400)
+        expect(response.body).to.deep.equal({
+          message: 'User not found'
+        })
+      });
+    });
   });
 });
 
