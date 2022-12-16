@@ -1,6 +1,5 @@
-const getSimilarPersons = (userId) => {
-    return new Promise((resolve)=>
-    resolve([
+const getSimilarPersons = async (userId) => {
+    return [
       {
         id: 3,
         name: "Larissa",
@@ -13,8 +12,7 @@ const getSimilarPersons = (userId) => {
         id: 5,
         name: "Miguel",
       },
-    ])
-  );
+    ]
 }
   
 
