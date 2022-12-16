@@ -1,0 +1,5 @@
+
+
+const calculateSimilarity = (userId, users) => {
+
+}

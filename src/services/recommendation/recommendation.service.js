@@ -1,4 +1,4 @@
-const getSimilarPersons = (personId) => {
+const getSimilarPersons = (userId) => {
     return new Promise((resolve)=>
     resolve([
       {
