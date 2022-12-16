@@ -48,6 +48,39 @@ describe("Test Recommendation", function () {
         expect(response).to.have.status(200);
         expect(response.body).to.deep.equal(expectedBody);
       });
+      it("should show a list of similar persons sorted by similarity in ascending order", async function () {
+        const expectedBody = [
+          {
+            user_id: 6,
+            prob: "0.00",
+          },
+          {
+            user_id: 4,
+            prob: "0.33",
+          },
+          {
+            user_id: 5,
+            prob: "0.35",
+          },
+          {
+            user_id: 1,
+            prob: "0.39",
+          },
+          {
+            user_id: 3,
+            prob: "0.40",
+          },
+        ];
+        const response = await chai
+          .request(app)
+          .get("/recommendation/show-similar-users/2")
+          .query({
+            order: 'asc',
+          });
+
+        expect(response).to.have.status(200);
+        expect(response.body).to.deep.equal(expectedBody);
+      });
     });
     describe("When user id is invalid", function () {
       it("should return User Not Found when id is invalid", async function () {
@@ -55,10 +88,10 @@ describe("Test Recommendation", function () {
         const response = await chai
           .request(app)
           .get(`/recommendation/show-similar-users/${userId}`);
-        expect(response).to.have.status(400)
+        expect(response).to.have.status(400);
         expect(response.body).to.deep.equal({
-          message: 'User not found'
-        })
+          message: "User not found",
+        });
       });
     });
   });

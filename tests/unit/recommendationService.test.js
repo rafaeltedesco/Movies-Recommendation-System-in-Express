@@ -65,49 +65,34 @@ describe("Test Recommendation Service", function () {
     });
   });
 
-  it.skip("given Person with id 2 should get TOP 3 similar persons", async function () {
+  it("should sort a list of probs in ascending order", async function () {
     const userId = 2;
     const expectedPersons = [
       {
-        id: 3,
-        name: "Larissa",
-        prob: 0.4,
+        user_id: 6,
+        prob: "0.00",
       },
       {
-        id: 1,
-        name: "Rafael",
-        prob: 0.38,
+        user_id: 4,
+        prob: "0.33",
       },
       {
-        id: 5,
-        name: "Miguel",
-        prob: 0.27,
+        user_id: 5,
+        prob: "0.35",
+      },
+      {
+        user_id: 1,
+        prob: "0.39",
+      },
+      {
+        user_id: 3,
+        prob: "0.40",
       },
     ];
-
-    const similarPersons = await recommendationService.getSimilarPersons(
+    const usersSimilarity = await recommendationService.getUsersSimilarity(
       userId
     );
-    expect(similarPersons).to.deep.equal(expectedPersons);
-  });
-  it.skip("given Person with id 3 should get TOP 3 similar persons", async function () {
-    const userId = 3;
-    const expectedPersons = [
-      {
-        id: 1,
-        name: "Rafael",
-      },
-      {
-        id: 5,
-        name: "Miguel",
-      },
-      {
-        id: 6,
-        name: "Leonardo",
-      },
-    ];
-
-    const simiarPersons = await recommendationService.getSimilarPersons(userId);
-    expect(simiarPersons).to.deep.equal(expectedPersons);
+    recommendationService.sortSimilarity(usersSimilarity, false);
+    expect(usersSimilarity).to.deep.equal(expectedPersons);
   });
 });
