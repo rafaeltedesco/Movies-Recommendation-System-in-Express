@@ -1,7 +1,7 @@
 const { Router } = require("express");
 
 const moviesService = require("../services/movie.service");
-const moviesAvaliation = require("../database/movies_avaliation.json");
+const moviesAvaliationService = require('../services/moviesAvaliation.service')
 const { OK } = require("../utils/httpResponse/httpStatusCode");
 
 const router = Router();
@@ -12,14 +12,11 @@ router.get("/", async (req, res) => {
     const movies = await moviesService.findAll();
     return res.status(OK).json(movies);
   }
-  const userMovies = moviesAvaliation.filter(
-    ({ user_id }) => user_id === Number(userId)
-  );
+  const userMovies = await moviesAvaliationService.getMoviesByPerson(userId);
 
   if (movieId) {
-    const movie = userMovies.find(
-      ({ movie_id }) => movie_id === Number(movieId)
-    );
+    const movie = await moviesAvaliationService.getPersonAvaliationByMovieId(userId, movieId)
+    
     return res.status(OK).json(movie);
   }
 
