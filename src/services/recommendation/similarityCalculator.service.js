@@ -1,5 +1,4 @@
 const {
-  getMoviesAvaliationByPerson,
   getAllMoviesAvaliations,
 } = require("../moviesAvaliation.service");
 const { euclideanDistance } = require("./distanceCalculators");
