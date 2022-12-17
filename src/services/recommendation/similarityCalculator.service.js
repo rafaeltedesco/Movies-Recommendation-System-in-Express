@@ -1,16 +1,13 @@
-const { getMoviesAvaliationByPerson } = require("../moviesAvaliation.service");
+const { getMoviesAvaliationByPerson, getAllMoviesAvaliations } = require("../moviesAvaliation.service");
 
 const calculateSimilarity = async (userId, usersToCompare) => {
-  const currentUserAvaliations = await getMoviesAvaliationByPerson(userId);
-  const usersAvaliations = await Promise.all(
-    usersToCompare.map(({ id }) => getMoviesAvaliationByPerson(id))
-  );
+  const allAvaliations = await getAllMoviesAvaliations(userId, usersToCompare)
   const similarities = [];
-  usersAvaliations.forEach((user) => {
+  allAvaliations.otherUsers.forEach((user) => {
     let accumulator = 0;
     let temp_id = -1;
     user.forEach((avaliation) => {
-      const matchedAvaliation = currentUserAvaliations.find(
+      const matchedAvaliation = allAvaliations.currentUser.find(
         (userAvaliation) => avaliation.movie_id === userAvaliation.movie_id
       );
       temp_id = avaliation.user_id;
