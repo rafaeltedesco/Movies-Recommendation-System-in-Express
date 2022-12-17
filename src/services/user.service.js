@@ -1,4 +1,4 @@
-const { writeFile, readFile } = require("../utils/io");
+const { readFile } = require("../utils/io");
 const path = require("path");
 
 const USER_PATH = path.resolve(__dirname, "..", "database", "users.json");

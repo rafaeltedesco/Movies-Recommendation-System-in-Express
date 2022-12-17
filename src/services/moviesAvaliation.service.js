@@ -1,4 +1,3 @@
-const moviesAvaliation = require("../database/movies_avaliation.json");
 const { readFile } = require("../utils/io");
 const path = require("path");
 
