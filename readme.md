@@ -25,6 +25,10 @@ GET /movies/:id
 
 Exibe filmes de acordo com o id
 
+POST /movies
+
+Adiciona um novo filme
+
 ---
 
 ### Users
