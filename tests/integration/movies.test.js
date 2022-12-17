@@ -35,7 +35,7 @@ describe("Test Movies routes", function () {
     });
   });
   describe("POST /movies", function () {
-    it("should add a new movie", async function () {
+    it.skip("should add a new movie", async function () {
       const newMovie = {
         name: "Black Adam",
       };
@@ -44,10 +44,18 @@ describe("Test Movies routes", function () {
         ...newMovie,
       };
 
-      const response = await chai.request(app).post("/movies").send(newMovie);
+      let response = await chai.request(app).post("/movies").send(newMovie);
 
       expect(response).to.have.status(201);
       expect(response.body).to.deep.equal(expectedBody);
+
+      response = await chai.request(app)
+        .get('/movies')
+
+      
+      expect(response.body).to.deep.equal([...movies, expectedBody])
+
+
     });
   });
 });

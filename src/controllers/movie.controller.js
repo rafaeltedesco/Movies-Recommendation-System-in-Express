@@ -6,7 +6,7 @@ const userService = require('../services/user.service')
 const getAllMovies = async (req, res) => {
   const { userId, movieId } = req.query;
   if (!userId) {
-    const movies = await moviesService.findAll();
+    const [movies] = await moviesService.findAll();
     return res.status(OK).json(movies);
   }
 
