@@ -34,4 +34,20 @@ describe("Test Movies routes", function () {
       });
     });
   });
+  describe("POST /movies", function () {
+    it("should add a new movie", async function () {
+      const newMovie = {
+        name: "Black Adam",
+      };
+      const expectedBody = {
+        id: 8,
+        ...newMovie,
+      };
+
+      const response = await chai.request(app).post("/movies").send(newMovie);
+
+      expect(response).to.have.status(201);
+      expect(response.body).to.deep.equal(expectedBody);
+    });
+  });
 });
