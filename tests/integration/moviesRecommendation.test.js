@@ -10,6 +10,7 @@
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 const app = require("../../src/app");
+const { OK, NOT_FOUND } = require("../../src/utils/httpResponse/httpStatusCode");
 
 chai.use(chaiHttp);
 
@@ -45,7 +46,7 @@ describe("Test Recommendation", function () {
           .request(app)
           .get("/recommendation/show-similar-users/2");
 
-        expect(response).to.have.status(200);
+        expect(response).to.have.status(OK);
         expect(response.body).to.deep.equal(expectedBody);
       });
       it("should show a list of similar persons sorted by similarity in ascending order", async function () {
@@ -78,7 +79,7 @@ describe("Test Recommendation", function () {
             order: 'asc',
           });
 
-        expect(response).to.have.status(200);
+        expect(response).to.have.status(OK);
         expect(response.body).to.deep.equal(expectedBody);
       });
     });
@@ -88,7 +89,7 @@ describe("Test Recommendation", function () {
         const response = await chai
           .request(app)
           .get(`/recommendation/show-similar-users/${userId}`);
-        expect(response).to.have.status(404);
+        expect(response).to.have.status(NOT_FOUND);
         expect(response.body).to.deep.equal({
           message: "User not found",
         });

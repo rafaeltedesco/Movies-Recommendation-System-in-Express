@@ -1,6 +1,7 @@
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 const app = require("../../src/app");
+const { OK, NOT_FOUND } = require("../../src/utils/httpResponse/httpStatusCode");
 
 chai.use(chaiHttp);
 
@@ -57,7 +58,7 @@ describe("Test Movie By User", function () {
       const response = await chai.request(app).get("/movies").query({
         userId: 1,
       });
-      expect(response).to.have.status(200);
+      expect(response).to.have.status(OK);
       expect(response.body).to.deep.equal(userMovies);
     });
     it("should return movie with id 7 from user 1", async function () {
@@ -72,7 +73,7 @@ describe("Test Movie By User", function () {
         movieId: 7,
       });
 
-      expect(response).to.have.status(200);
+      expect(response).to.have.status(OK);
       expect(response.body).to.deep.equal(expectedMovie);
     });
     it("should return 404 and message \"User not found\" when request an invalid user id", async function () {
@@ -80,7 +81,7 @@ describe("Test Movie By User", function () {
         userId: 10,
       });
 
-      expect(response).to.have.status(404);
+      expect(response).to.have.status(NOT_FOUND);
       expect(response.body).to.deep.equal({
         message: "User not found"
       });
