@@ -6,12 +6,7 @@ const router = Router();
 
 router
     .get("/", movieController.getAllMovies)
-    .post('/', (req, res)=> {
-        res.status(201).json({
-            id: 8,
-            name: 'Black Adam'
-        })
-    });
+    .post('/', movieController.createNewMovie);
 
 router.get("/:id", movieController.getMovieById);
 

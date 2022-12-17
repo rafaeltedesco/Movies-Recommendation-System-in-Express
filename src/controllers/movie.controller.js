@@ -36,7 +36,15 @@ const getMovieById = async (req, res) => {
   return res.status(OK).json(movie);
 };
 
+const createNewMovie = async (req, res)=> {
+  res.status(201).json({
+      id: 8,
+      name: 'Black Adam'
+  })
+}
+
 module.exports = {
     getAllMovies,
-    getMovieById
+    getMovieById,
+    createNewMovie
 }
