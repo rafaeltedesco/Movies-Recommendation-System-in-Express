@@ -37,10 +37,8 @@ const getMovieById = async (req, res) => {
 };
 
 const createNewMovie = async (req, res)=> {
-  res.status(201).json({
-      id: 8,
-      name: 'Black Adam'
-  })
+  const newMovie = await moviesService.create(req.body);
+  res.status(201).json(newMovie)
 }
 
 module.exports = {
