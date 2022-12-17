@@ -24,5 +24,15 @@ describe("Test Users routes", function () {
       expect(response).to.have.status(OK);
       expect(response.body).to.deep.equal(users[0]);
     });
+    it("should return status 404 and message \"User not found\" when request an invalid user Id", async function () {
+      const invalidUserId = 10;
+      const response = await chai.request(app)
+        .get(`/users/${invalidUserId}`)
+
+      expect(response).to.have.status(404)
+      expect(response.body).to.deep.equal({
+        message: 'User not found'
+      })
+    })
   });
 });

@@ -7,8 +7,8 @@ const getAllUsers = async (_req, res) => {
 };
 
 const getUsersById = async (req, res) => {
-  const { id } = req.params;
-  const user = await userService.findById(Number(id));
+  const userId  = req.userId;
+  const user = await userService.findById(Number(userId));
   res.status(OK).json(user);
 };
 
