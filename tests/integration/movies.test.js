@@ -7,7 +7,10 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 const movies = require("../../src/database/movies.json");
-const { OK, NOT_FOUND } = require("../../src/utils/httpResponse/httpStatusCode");
+const {
+  OK,
+  NOT_FOUND,
+} = require("../../src/utils/httpResponse/httpStatusCode");
 
 describe("Test Movies routes", function () {
   describe("GET / movies", function () {

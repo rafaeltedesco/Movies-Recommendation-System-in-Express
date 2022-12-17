@@ -86,5 +86,16 @@ describe("Test Movie By User", function () {
         message: "User not found"
       });
     })
+    it('should return 404 and message "Movie not found" when request for an invalid movie id', async function () {
+      const response = await chai.request(app).get("/movies").query({
+        userId: 3,
+        movieId: 4
+      });
+
+      expect(response).to.have.status(NOT_FOUND);
+      expect(response.body).to.deep.equal({
+        message: "Movie not found"
+      });
+    });
   });
 });

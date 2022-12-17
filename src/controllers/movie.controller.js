@@ -17,6 +17,9 @@ const getAllMovies = async (req, res) => {
 
   if (movieId) {
     const movie = await moviesAvaliationService.getMovieAvaliationByMovieId(userId, movieId)
+    if (!movie) return res.status(NOT_FOUND).json({
+        message: 'Movie not found'
+    })
     
     return res.status(OK).json(movie);
   }
