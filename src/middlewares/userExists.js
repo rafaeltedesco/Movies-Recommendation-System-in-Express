@@ -5,7 +5,7 @@ const userExists = async (req, res, next) => {
     const { userId } = req.params;
     if(!await userService.exists(userId)) {
         const err = new Error('User not found')
-        err.status = 400
+        err.status = 404
         next(err)
     }
     req.userId = userId

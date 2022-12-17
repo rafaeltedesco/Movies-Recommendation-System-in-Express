@@ -88,7 +88,7 @@ describe("Test Recommendation", function () {
         const response = await chai
           .request(app)
           .get(`/recommendation/show-similar-users/${userId}`);
-        expect(response).to.have.status(400);
+        expect(response).to.have.status(404);
         expect(response.body).to.deep.equal({
           message: "User not found",
         });
