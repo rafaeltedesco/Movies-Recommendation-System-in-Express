@@ -1,14 +1,19 @@
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 const app = require("../../src/app");
+const sinon = require("sinon");
 
-const { OK, NOT_FOUND } = require("../../src/utils/httpResponse/httpStatusCode");
+const {
+  OK,
+  NOT_FOUND,
+} = require("../../src/utils/httpResponse/httpStatusCode");
+const fs = require("fs").promises;
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
 
-const userMovies = [
+const userMovies = JSON.stringify([
   {
     id: 1,
     movie_id: 1,
@@ -51,16 +56,22 @@ const userMovies = [
     user_id: 1,
     stars: 4.0,
   },
-];
+]);
+
+const parsedUserMovies = JSON.parse(userMovies);
 
 describe("Test Movie By User", function () {
   describe("/movies using query params", function () {
+    beforeEach(() => {
+      sinon.stub(fs, "readFile").resolves(userMovies);
+    });
+    afterEach(sinon.restore);
     it("should return all movies for user with id 1", async function () {
       const response = await chai.request(app).get("/movies").query({
         userId: 1,
       });
       expect(response).to.have.status(OK);
-      expect(response.body).to.deep.equal(userMovies);
+      expect(response.body).to.deep.equal(parsedUserMovies);
     });
     it("should return movie with id 7 from user 1", async function () {
       const expectedMovie = {
@@ -77,25 +88,25 @@ describe("Test Movie By User", function () {
       expect(response).to.have.status(OK);
       expect(response.body).to.deep.equal(expectedMovie);
     });
-    it("should return 404 and message \"User not found\" when request an invalid user id", async function () {
+    it('should return 404 and message "User not found" when request an invalid user id', async function () {
       const response = await chai.request(app).get("/movies").query({
         userId: 10,
       });
 
       expect(response).to.have.status(NOT_FOUND);
       expect(response.body).to.deep.equal({
-        message: "User not found"
+        message: "User not found",
       });
-    })
+    });
     it('should return 404 and message "Movie not found" when request for an invalid movie id', async function () {
       const response = await chai.request(app).get("/movies").query({
         userId: 3,
-        movieId: 4
+        movieId: 4,
       });
 
       expect(response).to.have.status(NOT_FOUND);
       expect(response.body).to.deep.equal({
-        message: "Movie not found"
+        message: "Movie not found",
       });
     });
   });
