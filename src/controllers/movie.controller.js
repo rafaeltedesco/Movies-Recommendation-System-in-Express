@@ -1,6 +1,7 @@
 const moviesService = require("../services/movie.service");
 const moviesAvaliationService = require('../services/moviesAvaliation.service')
 const { OK, NOT_FOUND } = require("../utils/httpResponse/httpStatusCode");
+const userService = require('../services/user.service')
 
 const getAllMovies = async (req, res) => {
   const { userId, movieId } = req.query;
@@ -8,6 +9,10 @@ const getAllMovies = async (req, res) => {
     const movies = await moviesService.findAll();
     return res.status(OK).json(movies);
   }
+
+  if (!await userService.exists(userId)) return res.status(404).json({
+    message: 'User not found'
+  })
   const userMovies = await moviesAvaliationService.getMoviesAvaliationByPerson(userId);
 
   if (movieId) {
