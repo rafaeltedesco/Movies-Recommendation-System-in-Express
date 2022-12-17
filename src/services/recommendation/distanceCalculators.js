@@ -13,19 +13,19 @@ Author: PEB
 font: https://xlinux.nist.gov/dads/HTML/euclidndstnc.html
 */
 
-const euclideanDistance = (otherUserAvaliations, currentUser) => {
+const euclideanDistance = (p1, p2, propertyToCompare, propertyToCalculate, id_field) => {
     let accumulator = 0
-    let otherUserId = -1
-    otherUserAvaliations.forEach((avaliation) => {
-        const matchedAvaliation = currentUser.find(
-          (userAvaliation) => avaliation.movie_id === userAvaliation.movie_id
+    let id = -1
+    p1.forEach((object) => {
+        const matchedAvaliation = p2.find(
+          (userAvaliation) => object[propertyToCompare] === userAvaliation[propertyToCompare]
         );
-        otherUserId = avaliation.user_id;
+        id = object[id_field];
         if (!matchedAvaliation) return;
-        accumulator += Math.pow(avaliation.stars - matchedAvaliation.stars, 2);
+        accumulator += Math.pow(object[propertyToCalculate] - matchedAvaliation[propertyToCalculate], 2);
       });
     return {
-        user_id: otherUserId,
+        [id_field]: id,
         prob: accumulator > 0
         ? (1 / (1 + Math.sqrt(accumulator))).toFixed(2)
         : (0).toFixed(2),

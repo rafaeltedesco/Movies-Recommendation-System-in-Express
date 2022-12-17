@@ -11,7 +11,10 @@ const calculateSimilarity = async (userId, usersToCompare) => {
     similarities.push(
       euclideanDistance(
         otherUser,
-        allAvaliations.currentUser
+        allAvaliations.currentUser,
+        'movie_id',
+        'stars',
+        'user_id'
       )
     );
   });
