@@ -21,5 +21,13 @@ describe("Test Movies routes", function () {
       expect(response).to.have.status(200);
       expect(response.body).to.deep.equal(movies[0]);
     });
+    it('should return 404 and message "User not found" when request for an invalid id', async function () {
+      const invalidMovieId = 10;
+      const response = await chai.request(app).get(`/movies/${invalidMovieId}`);
+      expect(response).to.have.status(404);
+      expect(response.body).to.deep.equal({
+        message: "User not found",
+      });
+    });
   });
 });

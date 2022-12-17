@@ -22,7 +22,10 @@ const getAllMovies = async (req, res) => {
 const getMovieById = async (req, res) => {
   const { id } = req.params;
   const movie = await moviesService.findById(id);
-  res.status(OK).json(movie);
+  if (!movie) {
+    return res.status(404).json({message: 'User not found'})
+  }
+  return res.status(OK).json(movie);
 };
 
 module.exports = {
