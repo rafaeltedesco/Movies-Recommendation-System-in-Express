@@ -1,12 +1,27 @@
 const moviesAvaliation = require("../database/movies_avaliation.json");
+const { readFile } = require("../utils/io");
+const path = require("path");
 
-const findAll = async () => moviesAvaliation;
+const MOVIESAVALIATION_PATH = path.resolve(
+  __dirname,
+  "..",
+  "database",
+  "movies_avaliation.json"
+);
 
-const getMoviesAvaliationByPerson = async (userId) =>
-  moviesAvaliation.filter(({ user_id }) => user_id === Number(userId));
+const findAll = async () => await readFile(MOVIESAVALIATION_PATH)
 
-const findById = async (id) =>
-  moviesAvaliation.find((movieAvaliation) => movieAvaliation.id === Number(id));
+const getMoviesAvaliationByPerson = async (userId) => {
+  const [moviesAvaliation] = await findAll()
+  return moviesAvaliation.filter(({ user_id }) => user_id === Number(userId));
+}
+  
+
+const findById = async (id) => {
+  const [moviesAvaliation] = await findAll()
+  return moviesAvaliation.find((movieAvaliation) => movieAvaliation.id === Number(id));
+}
+  
 
 const getMovieAvaliationByMovieId = async (userId, movieId) => {
   const userMovies = await getMoviesAvaliationByPerson(userId);
@@ -20,8 +35,8 @@ const getAllMoviesAvaliations = async (userId, usersToCompare) => {
   );
   return {
     currentUser: currentUserAvaliations,
-    otherUsers: usersAvaliations
-  }
+    otherUsers: usersAvaliations,
+  };
 };
 
 module.exports = {
