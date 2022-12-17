@@ -2,7 +2,7 @@ const { OK } = require("../utils/httpResponse/httpStatusCode");
 const userService = require("../services/user.service");
 
 const getAllUsers = async (_req, res) => {
-  const users = await userService.findAll();
+  const [users] = await userService.findAll();
   res.status(OK).json(users);
 };
 
