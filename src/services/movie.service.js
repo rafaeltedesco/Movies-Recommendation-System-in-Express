@@ -1,8 +1,6 @@
-const movies = require('../database/movies.json');
 const path = require('path')
 
-const { writeFile } = require('../utils/io/writeFile');
-const { readFile } = require('../utils/io/readFile');
+const { readFile, writeFile } = require('../utils/io');
 
 const MOVIE_PATH = path.resolve(__dirname, '..', 'database', 'movies.json')
 
