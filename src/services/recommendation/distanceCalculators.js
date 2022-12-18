@@ -8,8 +8,6 @@ See also rectilinear, Manhattan distance, Lm distance.
 
 Note: In N dimensions, the Euclidean distance between two points p and q is √(∑i=1N (pi-qi)²) where pi (or qi) is the coordinate of p (or q) in dimension i.
 
-Author: PEB
-
 font: https://xlinux.nist.gov/dads/HTML/euclidndstnc.html
 */
 
